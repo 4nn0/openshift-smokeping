@@ -71,4 +71,4 @@ VOLUME ["/etc/smokeping", "/etc/ssmtp", "/var/lib/smokeping", \
 
 EXPOSE 80
 
-ENTRYPOINT ["smokeping.sh"]
+ENTRYPOINT ["/usr/bin/smokeping.sh"]
