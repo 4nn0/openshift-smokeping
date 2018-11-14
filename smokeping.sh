@@ -183,10 +183,6 @@ shift $(( OPTIND - 1 ))
 
 mkdir -p /run/smokeping
 [[ -p /tmp/log ]] || mkfifo -m 0660 /tmp/log
-chown -Rh smokeping:www-data /var/cache/smokeping /var/lib/smokeping \
-            /run/smokeping /tmp/log 2>&1 | grep -iv 'Read-only' || :
-chmod -R g+ws /var/cache/smokeping /var/lib/smokeping /run/smokeping 2>&1 |
-            grep -iv 'Read-only' || :
 
 if [[ $# -ge 1 && -x $(which $1 2>&-) ]]; then
     exec "$@"

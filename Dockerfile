@@ -16,7 +16,7 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
     conf=/etc/lighttpd/lighttpd.conf dir=/etc/lighttpd/conf-available \
                 header=setenv.add-response-header && \
     sed -i '/server.errorlog/s|^|#|' $conf && \
-    sed -i '/server.port                 = 80/server.port                 = 8080/' $conf && \
+    sed -i 's/server.port                 = 80/server.port                 = 8080/' $conf && \
     sed -i '/server.document-root/s|/html||' $conf && \
     sed -i '/mod_rewrite/a\ \t"mod_setenv",' $conf && \
     echo "\\n$header"' += ( "X-XSS-Protection" => "1; mode=block" )' >>$conf &&\
