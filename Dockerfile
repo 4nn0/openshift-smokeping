@@ -70,6 +70,6 @@ COPY smokeping.sh /usr/bin/
 VOLUME ["/etc/smokeping", "/etc/ssmtp", "/var/lib/smokeping", \
             "/var/cache/smokeping"]
 
-EXPOSE 80
+EXPOSE 8080
 
 ENTRYPOINT ["/usr/bin/smokeping.sh"]
