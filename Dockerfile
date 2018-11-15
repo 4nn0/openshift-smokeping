@@ -8,6 +8,7 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
                 fonts-dejavu-core echoping ca-certificates curl lighttpd \
                 $(apt-get -s dist-upgrade|awk '/^Inst.*ecurity/ {print $2}') &&\
     apt-get clean && \
+    /bin/echo '@include /etc/smokeping/dynamic/Config' >> /etc/smokeping/config && \
     /bin/echo -e '+ EchoPingHttp\n\nbinary = /usr/bin/echoping\n' \
                 >>/etc/smokeping/config.d/Probes && \
     /bin/echo -e '+ EchoPingHttps\n\nbinary = /usr/bin/echoping\n' \
