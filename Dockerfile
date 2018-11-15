@@ -5,17 +5,11 @@ MAINTAINER David Personette <dperson@gmail.com>
 RUN export DEBIAN_FRONTEND='noninteractive' && \
     apt-get update -qq && \
     apt-get install -qqy --no-install-recommends smokeping ssmtp dnsutils \
-                fonts-dejavu-core echoping ca-certificates curl lighttpd \
+                fonts-dejavu-core echoping ca-certificates curl lighttpd wget \
                 $(apt-get -s dist-upgrade|awk '/^Inst.*ecurity/ {print $2}') &&\
     apt-get clean && \
-    /bin/echo '@include /etc/smokeping/dynamic/Config' >> /etc/smokeping/config && \
-    /bin/rm /etc/smokeping/config.d/Targets && \
-    /bin/ln -s /etc/smokeping/dynamic/Config /etc/smokeping/config.d/Targets && \
-    /bin/echo -e '+ EchoPingHttp\n\nbinary = /usr/bin/echoping\n' \
-                >>/etc/smokeping/config.d/Probes && \
-    /bin/echo -e '+ EchoPingHttps\n\nbinary = /usr/bin/echoping\n' \
-                >>/etc/smokeping/config.d/Probes && \
-    sed -i '/^syslogfacility/s/^/#/' /etc/smokeping/config.d/General && \
+    /bin/echo '@include /etc/smokeping/config.d/Config' >> /etc/smokeping/config && \
+    /bin/rm /etc/smokeping/config.d/* && \
     conf=/etc/lighttpd/lighttpd.conf dir=/etc/lighttpd/conf-available \
                 header=setenv.add-response-header && \
     sed -i '/server.errorlog/s|^|#|' $conf && \
