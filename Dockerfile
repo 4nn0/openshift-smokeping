@@ -8,7 +8,7 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
                 fonts-dejavu-core echoping ca-certificates curl lighttpd wget \
                 $(apt-get -s dist-upgrade|awk '/^Inst.*ecurity/ {print $2}') &&\
     apt-get clean && \
-    /bin/echo '@include /etc/smokeping/config.d/Config' >> /etc/smokeping/config && \
+    /bin/echo '@include /etc/smokeping/config.d/Config' > /etc/smokeping/config && \
     /bin/rm /etc/smokeping/config.d/* && \
     conf=/etc/lighttpd/lighttpd.conf dir=/etc/lighttpd/conf-available \
                 header=setenv.add-response-header && \
