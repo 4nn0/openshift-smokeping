@@ -9,6 +9,8 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
                 $(apt-get -s dist-upgrade|awk '/^Inst.*ecurity/ {print $2}') &&\
     apt-get clean && \
     /bin/echo '@include /etc/smokeping/dynamic/Config' >> /etc/smokeping/config && \
+    /bin/rm /etc/smokeping/config.d/Targets && \
+    /bin/ln -s /etc/smokeping/dynamic/Config /etc/smokeping/config.d/Targets && \
     /bin/echo -e '+ EchoPingHttp\n\nbinary = /usr/bin/echoping\n' \
                 >>/etc/smokeping/config.d/Probes && \
     /bin/echo -e '+ EchoPingHttps\n\nbinary = /usr/bin/echoping\n' \
