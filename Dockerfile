@@ -60,12 +60,12 @@ RUN set -x \
     ln -s /usr/lib/cgi-bin/smokeping.cgi /var/www/smokeping/ && \
     chmod u+s /usr/bin/fping && \
     rm -rf /var/lib/apt/lists/* /tmp/* && \
-    mkdir -p /run/smokeping && \
+    mkdir -p /run && \
     mkdir -p /var/cache/smokeping/images && \
     mkdir -p /var/lib/smokeping/Local && \
-    chmod g+rw /run/smokeping && \
-    chmod g+rw /var/cache/smokeping/images && \
-    chmod g+rw /var/lib/smokeping/Local
+    chmod g+rw -R /run && \
+    chmod g+rw -R /var/cache && \
+    chmod g+rw -R /var/lib/smokeping
 COPY smokeping.sh /usr/bin/
 
 EXPOSE 8080
