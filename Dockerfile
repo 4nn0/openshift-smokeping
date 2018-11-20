@@ -5,7 +5,7 @@ MAINTAINER David Personette <dperson@gmail.com>
 RUN set -x \
     export DEBIAN_FRONTEND='noninteractive' && \
     apt-get update -qq && \
-    apt-get install -qqy --no-install-recommends smokeping ssmtp dnsutils \
+    apt-get install -qqy --no-install-recommends smokeping ssmtp dnsutils lsof \
                 fonts-dejavu-core echoping ca-certificates curl lighttpd wget \
                 $(apt-get -s dist-upgrade|awk '/^Inst.*ecurity/ {print $2}') &&\
     apt-get clean && \
