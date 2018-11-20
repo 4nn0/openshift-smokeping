@@ -1,0 +1,37 @@
+apiVersion: v1
+data:
+  Config: "*** General ***\n\nowner     = Your Name Here                            #
+    your name\ncontact   = your.email@host.bla                       # your email\nmailhost
+    \ = your.smtp.server.bla                      # your mail server\nsendmail  =
+    /usr/sbin/sendmail\nimgcache  = /var/cache/smokeping/images                   #
+    filesystem directory where we store files\nimgurl    = ../smokeping/images\ndatadir
+    \  = /var/lib/smokeping                       # where we share data between the
+    daemon and webapp\npiddir    = /var/run                                  # filesystem
+    directory to store PID file\ncgiurl    = http://smokeping-anowak-test.ose3.puzzle.ch/smokeping/smokeping.cgi
+    \ # exterior URL\nsmokemail = /etc/smokeping/smokemail   \ntmail     = /etc/smokeping/tmail\nsyslogfacility
+    = local0\n# each probe is now run in its own process\n# disable this to revert
+    to the old behaviour\n# concurrentprobes = no\n\n*** Database ***\n\nstep     =
+    60\npings    = 10\n\n# consfn mrhb steps total\n\nAVERAGE  0.5   1  1008\nAVERAGE
+    \ 0.5  12  4320\n    MIN  0.5  12  4320\n    MAX  0.5  12  4320\nAVERAGE  0.5
+    144   720\n    MAX  0.5 144   720\n    MIN  0.5 144   720\n\n*** Presentation
+    ***\n\ntemplate = /etc/smokeping/basepage.html\n\n+ charts\n\nmenu = Charts\ntitle
+    = The most interesting destinations\n++ stddev\nsorter = StdDev(entries=>4)\ntitle
+    = Top Standard Deviation\nmenu = Std Deviation\nformat = Standard Deviation %f\n\n++
+    max\nsorter = Max(entries=>5)\ntitle = Top Max Roundtrip Time\nmenu = by Max\nformat
+    = Max Roundtrip Time %f seconds\n\n++ loss\nsorter = Loss(entries=>5)\ntitle =
+    Top Packet Loss\nmenu = Loss\nformat = Packets Lost %f\n\n++ median\nsorter =
+    Median(entries=>5)\ntitle = Top Median Roundtrip Time\nmenu = by Median\nformat
+    = Median RTT %f seconds\n\n+ overview \n\nwidth = 600\nheight = 50\nrange = 10h\n\n+
+    detail\n\nwidth = 600\nheight = 200\nunison_tolerance = 2\n\n\"Last 3 Hours\"
+    \   3h\n\"Last 30 Hours\"   30h\n\"Last 10 Days\"    10d\n\"Last 400 Days\"   400d\n\n***
+    Probes ***\n\n+ FPing\n\nbinary = /usr/bin/fping\n\n*** Targets ***\n\nprobe =
+    FPing\n\nmenu = Top\ntitle = Network Latency Grapher\nremark = Welcome to the
+    SmokePing website of Arch User. \\\n         Here you will learn all about the
+    latency of our network.\n\n+ targets\nmenu = Targets\n\n++ Localhost\n \nmenu
+    = Localhost\ntitle = Localhost\nhost = 127.0.0.1\n\n++ GoogleDNS\n\nmenu = Google
+    DNS\ntitle = Google DNS server\nhost = 8.8.8.8\n\n++ MultiHost\n\nmenu = Multihost
+    example\ntitle = Localhost and Google DNS\nhost = /targets/Localhost /targets/GoogleDNS"
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: smoke-ping
