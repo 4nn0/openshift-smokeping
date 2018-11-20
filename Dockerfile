@@ -2,7 +2,8 @@ FROM debian:jessie
 MAINTAINER David Personette <dperson@gmail.com>
 
 # Install lighttpd and smokeping
-RUN export DEBIAN_FRONTEND='noninteractive' && \
+RUN set -x \
+    export DEBIAN_FRONTEND='noninteractive' && \
     apt-get update -qq && \
     apt-get install -qqy --no-install-recommends smokeping ssmtp dnsutils \
                 fonts-dejavu-core echoping ca-certificates curl lighttpd wget \
@@ -58,7 +59,13 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
     ln -s /usr/lib/cgi-bin /var/www/ && \
     ln -s /usr/lib/cgi-bin/smokeping.cgi /var/www/smokeping/ && \
     chmod u+s /usr/bin/fping && \
-    rm -rf /var/lib/apt/lists/* /tmp/*
+    rm -rf /var/lib/apt/lists/* /tmp/* && \
+    mkdir -p /run/smokeping && \
+    mkdir -p /var/cache/smokeping/images && \
+    mkdir -p /var/lib/smokeping/Local && \
+    chmod g+rw /run/smokeping && \
+    chmod g+rw /var/cache/smokeping/images && \
+    chmod g+rw /var/lib/smokeping/Local
 COPY smokeping.sh /usr/bin/
 
 EXPOSE 8080

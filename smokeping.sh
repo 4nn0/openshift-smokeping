@@ -181,9 +181,6 @@ shift $(( OPTIND - 1 ))
 [[ "${USERID:-""}" =~ ^[0-9]+$ ]] && usermod -u $USERID -o smokeping
 [[ "${GROUPID:-""}" =~ ^[0-9]+$ ]] && groupmod -g $GROUPID -o smokeping
 
-mkdir -p /run/smokeping
-mkdir -p /var/cache/smokeping/images
-mkdir -p /var/lib/smokeping/Local
 [[ -p /tmp/log ]] || mkfifo -m 0660 /tmp/log
 
 if [[ $# -ge 1 && -x $(which $1 2>&-) ]]; then
