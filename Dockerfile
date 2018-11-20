@@ -65,7 +65,8 @@ RUN set -x \
     mkdir -p /var/lib/smokeping/Local && \
     chmod g+rw -R /run && \
     chmod g+rw -R /var/cache && \
-    chmod g+rw -R /var/lib/smokeping
+    chmod g+rw -R /var/lib/smokeping && \
+    chown root:root -R /var/lib/smokeping
 COPY smokeping.sh /usr/bin/
 
 EXPOSE 8080
