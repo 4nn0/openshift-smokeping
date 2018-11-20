@@ -181,8 +181,6 @@ shift $(( OPTIND - 1 ))
 [[ "${USERID:-""}" =~ ^[0-9]+$ ]] && usermod -u $USERID -o smokeping
 [[ "${GROUPID:-""}" =~ ^[0-9]+$ ]] && groupmod -g $GROUPID -o smokeping
 
-[[ -p /tmp/log ]] || mkfifo -m 0660 /tmp/log
-
 if [[ $# -ge 1 && -x $(which $1 2>&-) ]]; then
     exec "$@"
 elif [[ $# -ge 1 ]]; then
@@ -191,7 +189,9 @@ elif [[ $# -ge 1 ]]; then
 elif ps -ef | egrep -v 'grep|smokeping.sh' | grep -q smokeping; then
     echo "Service already running, please restart container to apply changes"
 else
-    tail -F /tmp/log &
+    touch /tmp/log
+    tail -f /tmp/log &
+    sleep 1
     /bin/bash -c "exec /usr/sbin/smokeping --logfile=/tmp/log --debug" &
     exec lighttpd -D -f /etc/lighttpd/lighttpd.conf
 fi
