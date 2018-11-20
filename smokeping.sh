@@ -192,6 +192,6 @@ else
     touch /tmp/log
     tail -f /tmp/log &
     sleep 1
-    exec lighttpd -D -f /etc/lighttpd/lighttpd.conf &
-    /usr/sbin/smokeping --logfile=/tmp/log --debug
+    exec lighttpd -D -f /etc/lighttpd/lighttpd.conf
+    exec /usr/sbin/smokeping --logfile=/tmp/log --debug
 fi
